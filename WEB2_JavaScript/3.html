@@ -5,33 +5,39 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="style.css">
     <script>
-    function LinksSetColor (color) {
-      var alist = document.querySelectorAll('a');
-      var i = 0;
-      while(i < alist.length) {
-        console.log(alist[i]);
-        alist[i].style.color = color;
-        i = i + 1;
+
+      var Links = {
+        setColor:function(color) {
+          var alist = document.querySelectorAll('a');
+          var i = 0;
+          while(i < alist.length) {
+            console.log(alist[i]);
+            alist[i].style.color = color;
+            i = i + 1;
+          }
+        }
       }
-    }
-    function BodySetColor(color) {
-      document.querySelector('body').style.color = color;
-    }
-    function BodySetBackgroundColor(color) {
-      document.querySelector('body').style.backgroundColor = color;
-    }
+      var Body = {
+        setColor:function(color) {
+          document.querySelector('body').style.color = color;
+        },
+        setBackgroundColor:function(color) {
+          document.querySelector('body').style.backgroundColor = color;
+        }
+      }
+
       function nightDayHandler(self) {
         var target = document.querySelector('body');
         if(self.value === 'night') {
-          BodySetColor('white');
-          BodySetBackgroundColor('black');
+          Body.setColor('white');
+          Body.setBackgroundColor('black');
           self.value = 'day';
-          LinksSetColor('powderblue');
+          Links.setColor('powderblue');
         } else {
-          BodySetColor('black');
-          BodySetBackgroundColor('white');
+          Body.setColor('black');
+          Body.setBackgroundColor('white');
           self.value = 'night';
-          LinksSetColor('blue');
+          Links.setColor('blue');
         }
       }
     </script>
