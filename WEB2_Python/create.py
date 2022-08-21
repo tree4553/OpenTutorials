@@ -25,17 +25,14 @@ print('''<!doctype html>
 <body>
     <h1><a href="index.py">WEB</a></h1>
     <ol>
-        <!---
-        <li><a href="index.py?id=HTML">HTML</a></li>
-        <li><a href="index.py?id=CSS">CSS</a></li>
-        <li><a href="index.py?id=JavaScript">JavaScript</a></li>
-        <li><a href="index.py?id=Python">Python</a></li>
-        --->
         {listStr}
     </ol>
     <a href="create.py">create</a>
-    <h2>{title}</h2>
-    <p>{desc}</p>
+    <form action="process_create.py" method="post">
+        <p><input type="text" name="title" placeholder="title"></p>
+        <p><textarea rows="4" name="description" placeholder="description"></textarea></p>
+        <p><input type="submit"></p>
+    </form>
 </body>
 </html>
 '''.format(title=pageId, desc=description, listStr=listStr))
