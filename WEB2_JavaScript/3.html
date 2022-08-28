@@ -1,78 +1,88 @@
 <!doctype html>
 <html>
-  <head>
-    <title>WEB1 - JavaScript</title>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="style.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script>
-      var Links = {
-        setColor:function(color) {
-          // var alist = document.querySelectorAll('a');
-          // var i = 0;
-          // while(i < alist.length) {
-          //   console.log(alist[i]);
-          //   alist[i].style.color = color;
-          //   i = i + 1;
-          // }
-          $('a').css('color', color);
-        }
-      }
-      var Body = {
-        setColor:function(color) {
-          //document.querySelector('body').style.color = color;
-          $('body').css('color', color);
-        },
-        setBackgroundColor:function(color) {
-          //document.querySelector('body').style.backgroundColor = color;
-          $('body').css('backgroundColor', color);
-        }
-      }
 
-      function nightDayHandler(self) {
-        var target = document.querySelector('body');
-        if(self.value === 'night') {
-          Body.setColor('white');
-          Body.setBackgroundColor('black');
-          self.value = 'day';
-          Links.setColor('powderblue');
-        } else {
-          Body.setColor('black');
-          Body.setBackgroundColor('white');
-          self.value = 'night';
-          Links.setColor('blue');
-        }
+<head>
+  <title>WEB1 - JavaScript</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script>
+    var Links = {
+      setColor: function (color) {
+        // var alist = document.querySelectorAll('a');
+        // var i = 0;
+        // while(i < alist.length) {
+        //   console.log(alist[i]);
+        //   alist[i].style.color = color;
+        //   i = i + 1;
+        // }
+        $('a').css('color', color);
       }
-    </script>
-  </head>
+    }
+    var Body = {
+      setColor: function (color) {
+        //document.querySelector('body').style.color = color;
+        $('body').css('color', color);
+      },
+      setBackgroundColor: function (color) {
+        //document.querySelector('body').style.backgroundColor = color;
+        $('body').css('backgroundColor', color);
+      }
+    }
 
-  <body>
-    <h1><a href="index.html">WEB</a></h1>
-    <input type="button" value="night" onclick="
+    function nightDayHandler(self) {
+      var target = document.querySelector('body');
+      if (self.value === 'night') {
+        Body.setColor('white');
+        Body.setBackgroundColor('black');
+        self.value = 'day';
+        Links.setColor('powderblue');
+      } else {
+        Body.setColor('black');
+        Body.setBackgroundColor('white');
+        self.value = 'night';
+        Links.setColor('blue');
+      }
+    }
+  </script>
+</head>
+
+<body>
+  <h1><a href="index.html">WEB</a></h1>
+  <input type="button" value="night" onclick="
       document.querySelector('body').style.backgroundColor='black';
       document.querySelector('body').style.color='white';
     ">
-    <input type="button" value="day" onclick="
+  <input type="button" value="day" onclick="
       document.querySelector('body').style.backgroundColor='white';
       document.querySelector('body').style.color='black';
     ">
-    <input id="night_day" type="button" value="night" onclick="nightDayHandler(this)">
-    <div id="grid">
-      <ol>
-        <li><a href="1.html">HTML</a></li>
-        <li><a href="2.html">CSS</a></li>
-        <li><a href="3.html">JavaScript</a></li>
-        <li><a href="../index.html">HOME</a></li>
-      </ol>
-      <div id="article">
-        <h2>JavaScript</h2>
-        <p>JavaScript (/ˈdʒɑːvəˌskrɪpt/[6]), often abbreviated as JS, is a high-level, dynamic, weakly typed, prototype-based, multi-paradigm, and interpreted programming language.
-        </p><p>Alongside HTML and CSS, JavaScript is one of the three core technologies of World Wide Web content production.
-        </p><p>It is used to make webpages interactive and provide online programs, including video games.
-        </p><p>The majority of websites employ it, and all modern web browsers support it without the need for plug-ins by means of a built-in JavaScript engine.
-        </p><p>Each of the many JavaScript engines represent a different implementation of JavaScript, all based on the ECMAScript specification, with some engines not supporting the spec fully, and with many engines supporting additional features beyond ECMA.
-        </p>
-      </div>
+  <input id="night_day" type="button" value="night" onclick="nightDayHandler(this)">
+  <div id="grid">
+    <ol>
+      <li><a href="1.html">HTML</a></li>
+      <li><a href="2.html">CSS</a></li>
+      <li><a href="3.html">JavaScript</a></li>
+      <li><a href="../index.html">HOME</a></li>
+    </ol>
+    <div id="article">
+      <h2>JavaScript</h2>
+      <p>JavaScript (/ˈdʒɑːvəˌskrɪpt/[6]), often abbreviated as JS, is a high-level, dynamic, weakly typed,
+        prototype-based, multi-paradigm, and interpreted programming language.
+      </p>
+      <p>Alongside HTML and CSS, JavaScript is one of the three core technologies of World Wide Web content production.
+      </p>
+      <p>It is used to make webpages interactive and provide online programs, including video games.
+      </p>
+      <p>The majority of websites employ it, and all modern web browsers support it without the need for plug-ins by
+        means of a built-in JavaScript engine.
+      </p>
+      <p>Each of the many JavaScript engines represent a different implementation of JavaScript, all based on the
+        ECMAScript specification, with some engines not supporting the spec fully, and with many engines supporting
+        additional features beyond ECMA.
+      </p>
     </div>
-  </body>
+  </div>
+</body>
+
 </html>
