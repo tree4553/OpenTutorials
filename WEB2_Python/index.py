@@ -33,6 +33,7 @@ print('''<!doctype html>
 </head>
 <body>
     <h1><a href="index.py">WEB</a></h1>
+    <h2><a href="../index.html">HOME</a></h2>
     <ol>
         <!---
         <li><a href="index.py?id=HTML">HTML</a></li>
