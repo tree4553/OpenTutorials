@@ -2,48 +2,62 @@ var http = require('http');
 var fs = require('fs');
 var url = require('url');
 
+function templateHTML(title, list, body) {
+    return `
+    <!doctype html>
+    <html>
+    <head>
+        <title>${title}</title>
+        <meta charset="utf-8">
+    </head>
+
+    <body>
+        <h1><a href="/">WEB</a></h1>
+        ${list}
+        ${body}
+    </body>
+    </html>
+    `
+}
+
+function templateList(filelist) {
+    var list = '<ol>'
+    for (i = 0; i < filelist.length; i++) {
+        list = list + `<li><a href="/?id=${filelist[i]}">${filelist[i]}</a></li>`;
+    }
+    list += '</ol>'
+    return list;
+}
+
 var app = http.createServer(function (request, response) {
     var _url = request.url;
     var queryData = url.parse(_url, true).query;
-    var title = queryData.id;
+    var pathname = url.parse(_url, true).pathname;
 
-    console.log(queryData.id);
-    if (_url == '/') {
-        title = 'Welcome';
+    if (pathname === '/') {
+        if (queryData.id === undefined) {
+            fs.readdir('./data', function (error, filelist) {
+                var title = 'Welcome';
+                var data = 'Hello, Node.js';
+                var list = templateList(filelist);
+                var template = templateHTML(title, list, `<h2>${title}</h2>${data}`);
+                response.writeHead(200);
+                response.end(template);
+            });
+        } else {
+            fs.readdir('./data', function (error, filelist) {
+                fs.readFile(`data/${queryData.id}`, 'utf8', function (err, data) {
+                    var title = queryData.id;
+                    var list = templateList(filelist);
+                    var template = templateHTML(title, list, `<h2>${title}</h2>${data}`);
+                    response.writeHead(200);
+                    response.end(template);
+                });
+            });
+        }
+    } else {
+        response.writeHead(404);
+        response.end('Not found');
     }
-    if (_url == '/favicon.ico') {
-        return response.writeHead(404);
-    }
-    response.writeHead(200);
-    //console.log(__dirname + _url);
-    //response.end(fs.readFileSync(__dirname + _url));
-    fs.readFile(`data/${queryData.id}`, 'utf8', function (err, data) {
-        var template = `
-        <!doctype html>
-        <html>
-
-        <head>
-        <title>${title}</title>
-        <meta charset="utf-8">
-        </head>
-
-        <body>
-        <h1><a href="/">WEB</a></h1>
-        <ol>
-            <li><a href="/?id=HTML">HTML</a></li>
-            <li><a href="/?id=CSS">CSS</a></li>
-            <li><a href="/?id=JavaScript">JavaScript</a></li>
-        </ol>
-
-        <h2>${title}</h2>
-        ${data}
-        </body>
-        </html>
-        `;
-        response.end(template);
-    });
-
-
-
 });
 app.listen(3000);
