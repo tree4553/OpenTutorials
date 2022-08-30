@@ -1,6 +1,6 @@
 module.exports = {
-  HTML:function(title, list, body, control){
-    return `
+    HTML: function (title, list, body, control) {
+        return `
     <!doctype html>
     <html>
     <head>
@@ -15,14 +15,31 @@ module.exports = {
     </body>
     </html>
     `;
-  },list:function(filelist){
-    var list = '<ul>';
-    var i = 0;
-    while(i < filelist.length){
-      list = list + `<li><a href="/?id=${filelist[i]}">${filelist[i]}</a></li>`;
-      i = i + 1;
-    }
-    list = list+'</ul>';
-    return list;
-  }
-}
+    },
+    list: function (topics) {
+        var list = '<ul>';
+        var i = 0;
+        while (i < topics.length) {
+            list = list + `<li><a href="/?id=${topics[i].id}">${topics[i].title}</a></li>`;
+            i = i + 1;
+        }
+        list = list + '</ul>';
+        return list;
+    },
+    authorSelect: function (authors, author_id) {
+        var tag = '';
+
+        for (i = 0; i < authors.length; i++) {
+            var selected = '';
+            if (authors[i].id === author_id) {
+                selected = ' selected';
+            }
+            tag += `<option value="${authors[i].id}"${selected}>${authors[i].name}</option>`;
+        }
+        return `
+		<select name="author">
+			${tag}
+		</select>
+		`;
+    },
+};
