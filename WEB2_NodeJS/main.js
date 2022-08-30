@@ -55,7 +55,7 @@ var app = http.createServer(function (request, response) {
             var html = template.HTML(title, list,
                 `<h2>Create</h2>`,
                 `
-                <form action="http://localhost:3000/create_process" method="post">
+                <form action="/create_process" method="post">
                     <p><input type="text" name="title"></p>
                     <p>
                         <textarea name="description"></textarea>
@@ -92,7 +92,7 @@ var app = http.createServer(function (request, response) {
                 var html = template.HTML(title, list,
                     `<a href="/create">create</a> <a href="/update?id=${title}">update</a>`,
                     `
-                    <form action="http://localhost:3000/update_process" method="post">
+                    <form action="/update_process" method="post">
                     <input type="hidden" name="id" value="${title}">
                     <p><input type="text" name="title" placeholder="title" value="${title}"></p>
                     <p>
