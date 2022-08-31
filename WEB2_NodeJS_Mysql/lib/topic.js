@@ -2,6 +2,7 @@ var db = require('./db');
 var template = require('./template');
 var url = require('url');
 var qs = require('querystring');
+var sanitizeHtml = require('sanitize-html');
 
 exports.home = function (request, response) {
     db.query(`SELECT * FROM topic`, function (error, topics) {
@@ -13,7 +14,7 @@ exports.home = function (request, response) {
             title,
             list,
             `<h2>${title}</h2>${description}`,
-            `<a href="/create">create</a>`
+            `<a href="/create">Create article</a>`
         );
         response.writeHead(200);
         response.end(html);
@@ -40,14 +41,14 @@ exports.page = function (request, response) {
                 var html = template.HTML(
                     title,
                     list,
-                    `<h2>${title}</h2>
-						${description}
-						<p>by ${topic[0].name}</p>
+                    `<h2>${sanitizeHtml(title)}</h2>
+						${sanitizeHtml(description)}
+						<p>by ${sanitizeHtml(topic[0].name)}</p>
 						`,
                     `
-					<a href="/create">create</a>
+					<a href="/create">Create article</a>
 					<a href="/update?id=${queryData.id}">update</a>
-					<form action="delete_process" method="post">
+					<form action="/delete_process" method="post">
 						<input type="hidden" name="id" value="${queryData.id}">
 						<input type="submit" value="delete">
 					</form>
@@ -127,10 +128,9 @@ exports.update = function (request, response) {
                 if (error3) {
                     throw error3;
                 }
-                var title = topic[0].title;
                 var list = template.list(topics);
                 var html = template.HTML(
-                    title,
+                    sanitizeHtml(topic[0].title),
                     list,
                     `
 						<form action="/update_process" method="post">
@@ -186,7 +186,6 @@ exports.delete_process = function (request, response) {
     });
     request.on('end', function () {
         var post = qs.parse(body);
-        var id = post.id;
         db.query('DELETE FROM topic WHERE id=?', [post.id], function (error, result) {
             if (error) {
                 throw error;
